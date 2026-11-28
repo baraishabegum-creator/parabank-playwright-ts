@@ -1,4 +1,6 @@
-interface User {
+import { v4 as uuidv4 } from 'uuid';
+
+export interface User {
   username: string;
   password: string;
   firstName: string;
@@ -12,12 +14,11 @@ interface User {
 }
 
 export function generateUser(): User {
-  const timestamp = Date.now();
-  const random = Math.floor(Math.random() * 10000);
-  const uniqueId = `${timestamp}${random}`;
+  const uuid = uuidv4().replace(/-/g, '').substring(0, 12);
+  const random = Math.floor(Math.random() * 1000000);
 
   return {
-    username: `user${uniqueId}`,
+    username: `user_${uuid}`,
     password: 'Test@123',
     firstName: `FirstName${random}`,
     lastName: `LastName${random}`,
